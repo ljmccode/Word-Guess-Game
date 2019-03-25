@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -9,7 +10,37 @@
     <link rel="stylesheet" href="assets/css/style.css">
     <link rel="stylesheet" href="assets/javascript/game.js">
 </head>
+
 <body>
-    
+    <div class="game-name">
+        <h1>Countries of the World!</h1>
+    </div>
+    <div class="container">
+        <div>
+            <h3>Press any key to get started!</h3>
+            <div>
+                <h3 id="current-country">_ _ _ _ _</h3>
+            </div>
+            <div id="game-tracker">
+                <div>
+                    <h3>Wins: <span id="wins"></span></h3>
+                </div>
+                <div>
+                    <h3>Losses: <span id="losses"></span></h3>
+                </div>
+                <div>
+                    <h3>Remaining Lives: <span id="remaining-lives"></span></h3>
+                </div>
+                <div>
+                    <h3>Letters Already Guessed: </h3>
+                    <div id="guessedLetters">
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
 </body>
+
 </html>
