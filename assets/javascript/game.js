@@ -1,5 +1,3 @@
-
-// Variables
 var countries = [
     "argentina",
     "brazil",
@@ -23,97 +21,117 @@ var countries = [
     "zimbabwe"
 ];
 
-var randomCountry = "";
-var incorrect = [];
-var letterArray = [];
-var blanks = 0
-var wordProgess = []
-
-var wins = 0;
+// creating variables for game  
+var randomCountry = "";          
+var wordAttempt = [];
+var guessedLetters = [];                       
+var newGame = false;        
+var endOfGame = false;        
+var wins = -1;
 var losses = 0;
-var remainingLives = 12;
+var remainingGuesses = 0;                   
+var maxAttempts = 8;            
+
+// what will happen at the start of a new game
+function resetGame() {
+    newGame = false;
+    remainingGuesses = maxAttempts;
+    guessedLetters = [];
+    wordAttempt = [];
+
+    // Choosing a random country from list
+    randomCountry = Math.floor(Math.random() * (countries.length));
+
+    
+
+    // Build the guessing word and clear it out
+    for (var i = 0; i < countries[randomCountry].length; i++) {
+        wordAttempt.push(" _ ");
+    }
+
+    editScoreboard();
+
+    console.log(countries[randomCountry]);
+};
+
+// puts everything on the scoreboard back to original
+function editScoreboard() {
+
+    document.getElementById("wins").innerText = wins;
+    document.getElementById("losses").innerText = losses;
+    document.getElementById("current-country").innerText = "";
+    for (var i = 0; i < wordAttempt.length; i++) {
+        document.getElementById("current-country").innerText += wordAttempt[i];
+    }
+    document.getElementById("remaining-lives").innerText = remainingGuesses;
+    document.getElementById("guessed-letters").innerText = guessedLetters;
+    if(remainingGuesses <= 0) {
+        endOfGame = true;
+    }
+};
+
+document.onkeydown = function(event) {
+    if(endOfGame) {
+        resetGame();
+        endOfGame = false;
+    } else {
+        // establishes guess to be a lowercase letter
+        if(event.keyCode >= 65 && event.keyCode <= 90) {
+            guess(event.key.toLowerCase());
+        }
+    }
+};
+
+function guess(letter) {
+    if (remainingGuesses > 0) {
+        if (!newGame) {
+            newGame = true;
+        }
+
+        // double checks if letter has been pressed already
+        if (guessedLetters.indexOf(letter) === -1) {
+            guessedLetters.push(letter);
+            determineMatch(letter);
+        }
+    }
+    
+    editScoreboard();
+    checkWin();
+};
+
+function determineMatch(letter) {
+    // establishing an array for letters in word
+    var lettersInWord = [];
+    // going through letters of random country, if a match, put into lettersInWord array
+    for (var i = 0; i < countries[randomCountry].length; i++) {
+        if(countries[randomCountry][i] === letter) {
+            lettersInWord.push(i);
+        }
+    }
+
+    // if no letters in word array, remove a life
+    if (lettersInWord.length <= 0) {
+        remainingGuesses--;
+    } else {
+        // otherwise put matching letter in correct spot in word match
+        for(var i = 0; i < lettersInWord.length; i++) {
+            wordAttempt[lettersInWord[i]] = letter;
+        }
+    }
+};
+
+// if all blanks have been filled by letter, then win. 
+function checkWin() {
+    if(wordAttempt.indexOf(" _ ") === -1) {
+        wins++;
+        endOfGame = true;
+// if run out of guesses, then lose
+    } else if (remainingGuesses === 0) {
+        losses++;
+        endOfGame = true;
+    }
+};
  
 
-function start() {
-    // generating random word
-    var randomCountry = countries[Math.floor(Math.random() * countries.length)];
 
-    // separating current country letters into new array
-    letterArray = randomCountry.split("");
-
-    // assigning blanks to number of letters in word
-    blanks = letterArray.length;
-
-    // displays _ for each letter of current country
-    for (var i = 0; i < blanks; i++) {
-        wordProgess.push("_");
-    }
-
-    // displaying word on the page, joining them into a string
-    document.getElementById("current-country").innerHTML = " " + wordProgess.join(" ")
-
-    console.log(randomCountry);
-    console.log(letterArray);
-    console.log(blanks);
-    console.log(wordProgress);
-}
-
-// Checking if user guess correctly/incorrectly
-function determineMatch(userGuess) {
-    var letterMatch = false;
-    for (var i = 0; i < blanks; i++) {
-        // if a letter guessed matches, add letter to word
-        if (randomCountry[i] == userGuess) {
-            letterMatch = true;
-        }
-    }
-    if (letterMatch) {
-        for (var i = 0; i < blanks; i++) {
-            if (randomCountry[i] == userGuess) {
-                wordProgess[i] = userGuess;
-            }
-        }
-    else {
-            incorrect.push(userGuess);
-            remainingLives--;
-        }
-    document.getElementById("remainging-lives").innerHTML = " " + remainingLives;
-    document.getElementById("current-country").innerHTML = " " + wordProgress.join(" ");
-    console.log(wordProgess);
-    }
-
-    // Reset Function, lives return, erases letters guessed
-    function reset() {
-        remainingLives = 12;
-        wordProgess = [];
-        incorrect = [];
-        start();
-    }
-
-
-    // Function if there is a win or a loss
-    function endOfGame() {
-        // when letters in country all match up to letters guessed, win
-        if (letterArray.toString() == wordProgess.toString()) {
-            wins++
-            // updates wins in HTML
-            document.getElementById("wins").innerHTML = " " + wins;
-            reset()
-            // when no more lives, loss
-        } else if (remainingLives === 0) {
-            losses++;
-            document.getElementById("losses").innerHTML = " " + losses;
-        }
-    }
-
-
-
-    // Beginning new game function
-    start() 
-
-    document.onkeyup = function (event) {
-        var userGuess = event.key;
-        determineMatch(userGuess);
-        endOfGame();
-        document.getElementById("guessedLetters").innterHTML = " " + incorrect.join(" ");
-    }
+ 
