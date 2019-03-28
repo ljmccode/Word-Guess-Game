@@ -1,0 +1,70 @@
+h1, h3 {
+    font-family: 'BioRhyme', serif;
+}
+
+body {
+    background-image: url(https://images-na.ssl-images-amazon.com/images/G/01/aplusautomation/vendorimages/1c11d9f2-83b4-4a19-a1ac-91a5de8e0992.jpg._CB318277546_.jpg);
+    background-size: cover;
+}
+
+h1 {
+    font-weight: 400;
+    font-size: 3em !important;
+    color: rgb(126, 180, 247);
+    text-shadow: 4px 4px 4px rgb(131, 47, 159);
+    background-color: rgba(30, 91, 71, 0.9);
+    max-width: 660px;
+    margin-left: auto;
+    margin-right: auto;
+    margin-top: 20px !important;
+    padding: 15px;
+    border-radius: 25px;
+}
+
+h3 {
+    padding: 10px;
+}
+
+#current-country {
+    color: rgb(108, 25, 108);
+    font-weight: bold;
+    font-size: 40px;
+}
+
+.col-6 {
+    padding: 20px;
+    padding-top: 30px;
+    height: 500px;
+}
+
+#losing-image {
+    max-height: 216px;
+    max-width: 216px;
+}
+
+.game-name {
+    text-align: center;
+}
+
+#guessed-letters {
+    font-size: 25px;
+}
+
+.col-6 {
+    text-align: center;
+    background-color: rgba(237, 231, 231, 0.8);
+    border: blue groove 2px;
+}
+
+.left-column {
+    border-right: blue groove 1px;
+}
+
+.right-column {
+    border-left: blue groove 1px;
+}
+
+#losing-image, #winning-image, #next-game {
+    display: none;
+}
+

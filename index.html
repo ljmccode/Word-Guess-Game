@@ -8,32 +8,43 @@
     <title>Word Game</title>
     <link rel="stylesheet" href="assets/css/reset.css">
     <link rel="stylesheet" href="assets/css/style.css">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <link href="https://fonts.googleapis.com/css?family=BioRhyme:400,700" rel="stylesheet">
     <script type="text/javascript" src="assets/javascript/game.js"></script>
 </head>
 
 <body>
-    <div class="game-name">
-        <h1>Countries of the World!</h1>
-    </div>
     <div class="container">
-        <div>
-            <h3>Press any key to get started!</h3>
-            <div>
-                <h3 id="current-country"><br></h3>
+        <div class="row game-name">
+           <div class="col-12"> 
+               <h1>Countries of the World!</h1>
+           </div>
+        </div>
+        <div class="row" id="game-area">
+            <div class="col-6 justify-content-center left-column">
+            <h3 id="next-game">Press any key to play again!</h3>
+            <img src="assets/images/YouWin.png" alt="You Win" id="winning-image">
+            <img src="assets/images/youlose.jpg" alt="You Lose" id="losing-image">
             </div>
-            <div id="game-tracker">
+            <div class="col-6 right-column">
+                <h3 id="start-key">Press any key twice to get started!</h3>
                 <div>
-                    <h3>Wins: <span id="wins"></span></h3>
+                    <h3 id="current-country"><br></h3>
                 </div>
-                <div>
-                    <h3>Losses: <span id="losses"></span></h3>
-                </div>
-                <div>
-                    <h3>Remaining Lives: <span id="remaining-lives"></span></h3>
-                </div>
-                <div>
-                    <h3>Letters Already Guessed: </h3>
-                    <div id="guessed-letters">
+                <div id="game-tracker">
+                    <div>
+                        <h3>Wins: <span id="wins"></span></h3>
+                    </div>
+                    <div>
+                        <h3>Losses: <span id="losses"></span></h3>
+                    </div>
+                    <div>
+                        <h3>Remaining Lives: <span id="remaining-lives"></span></h3>
+                    </div>
+                    <div>
+                        <h3>Letters Already Guessed: </h3>
+                        <div id="guessed-letters">
+                        </div>
                     </div>
                 </div>
             </div>

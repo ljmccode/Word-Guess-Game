@@ -51,6 +51,10 @@ function resetGame() {
 
     editScoreboard();
 
+    document.getElementById("next-game").style.cssText = "display: none";
+    document.getElementById("winning-image").style.cssText = "display: none";
+    document.getElementById("losing-image").style.cssText = "display: none";
+
     console.log(countries[randomCountry]);
 };
 
@@ -96,7 +100,7 @@ function guess(letter) {
     }
     
     editScoreboard();
-    checkWin();
+    winorloss();
 };
 
 function determineMatch(letter) {
@@ -121,13 +125,19 @@ function determineMatch(letter) {
 };
 
 // if all blanks have been filled by letter, then win. 
-function checkWin() {
+function winorloss() {
     if(wordAttempt.indexOf(" _ ") === -1) {
         wins++;
+        document.getElementById("next-game").style.cssText = "display: block; margin-right:auto; margin-left: auto";
+        document.getElementById("winning-image").style.cssText = "display: block; margin-right:auto; margin-left: auto";
+        document.getElementById("start-key").innerText = "";
         endOfGame = true;
 // if run out of guesses, then lose
     } else if (remainingGuesses === 0) {
         losses++;
+        document.getElementById("next-game").style.cssText = "display: block; margin-right:auto; margin-left: auto";
+        document.getElementById("losing-image").style.cssText = "display: block; margin-right:auto; margin-left: auto";
+        document.getElementById("start-key").innerText = "";
         endOfGame = true;
     }
 };
