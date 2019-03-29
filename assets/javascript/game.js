@@ -27,7 +27,7 @@ var wordAttempt = [];
 var guessedLetters = [];                       
 var newGame = false;        
 var endOfGame = false;        
-var wins = -1;
+var wins = 0;
 var losses = 0;
 var remainingGuesses = 0;                   
 var maxAttempts = 8;            
@@ -88,9 +88,6 @@ document.onkeydown = function(event) {
 
 function guess(letter) {
     if (remainingGuesses > 0) {
-        if (!newGame) {
-            newGame = true;
-        }
 
         // double checks if letter has been pressed already
         if (guessedLetters.indexOf(letter) === -1) {
@@ -100,7 +97,7 @@ function guess(letter) {
     }
     
     editScoreboard();
-    winorloss();
+    winOrLoss();
 };
 
 function determineMatch(letter) {
@@ -125,19 +122,21 @@ function determineMatch(letter) {
 };
 
 // if all blanks have been filled by letter, then win. 
-function winorloss() {
-    if(wordAttempt.indexOf(" _ ") === -1) {
+function winOrLoss() {
+    if(wordAttempt.indexOf(" _ ") === -1 && guessedLetters.length > 0) {
         wins++;
         document.getElementById("next-game").style.cssText = "display: block; margin-right:auto; margin-left: auto";
         document.getElementById("winning-image").style.cssText = "display: block; margin-right:auto; margin-left: auto";
         document.getElementById("start-key").innerText = "";
+        document.getElementById("winning-audio").play();
         endOfGame = true;
 // if run out of guesses, then lose
-    } else if (remainingGuesses === 0) {
+    } else if (remainingGuesses === 0 && guessedLetters.length > 0) {
         losses++;
         document.getElementById("next-game").style.cssText = "display: block; margin-right:auto; margin-left: auto";
         document.getElementById("losing-image").style.cssText = "display: block; margin-right:auto; margin-left: auto";
         document.getElementById("start-key").innerText = "";
+        document.getElementById("losing-audio").play();
         endOfGame = true;
     }
 };
