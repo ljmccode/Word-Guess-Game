@@ -1,4 +1,4 @@
-# Word-Guess-Game
+# Guess that Country!
 
 [Link to live game](https://ljmccode.github.io/Word-Guess-Game/)
 
