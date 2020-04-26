@@ -1,5 +1,5 @@
 // array of countries to be guessed
-var countries = [
+const countries = [
     "argentina",
     "brazil",
     "croatia",
@@ -23,24 +23,22 @@ var countries = [
 ];
 
 // variables for game
-var randomCountry = "";
-var wordAttempt = [];
-var guessedLetters = [];
-var newGame = false;
-var endOfGame = false;
-var wins = 0;
-var losses = 0;
-var remainingGuesses = 0;
-var maxAttempts = 8;
+let randomCountry = "";
+let wordAttempt = [];
+let guessedLetters = [];
+let endOfGame = false;
+let wins = 0;
+let losses = 0;
+let remainingGuesses = 0;
+const maxAttempts = 8;
 
 // New game starts on page load
-window.onload = event => {
-    resetGame()
-}
+window.onload = () => {
+    resetGame();
+};
 
 // what will happen at the start of a new game
 function resetGame() {
-    newGame = false;
     remainingGuesses = maxAttempts;
     guessedLetters = [];
     wordAttempt = [];
@@ -49,7 +47,7 @@ function resetGame() {
     randomCountry = Math.floor(Math.random() * (countries.length));
 
     // Putting blanks for randomly chosen word
-    for (var i = 0; i < countries[randomCountry].length; i++) {
+    for (let i = 0; i < countries[randomCountry].length; i++) {
         wordAttempt.push(" _ ");
     }
 
@@ -61,7 +59,7 @@ function resetGame() {
     document.getElementById("losing-image").style.cssText = "display: none";
 
     console.log(countries[randomCountry]);
-};
+}
 
 // Updates Scoreboard
 function editScoreboard() {
@@ -69,7 +67,7 @@ function editScoreboard() {
     document.getElementById("losses").innerText = losses;
     document.getElementById("current-country").innerText = "";
     // Turns wordAttempt Array to string
-    let wordString = wordAttempt.join("");
+    const wordString = wordAttempt.join("");
     document.getElementById("current-country").innerText = wordString[0].toUpperCase() + wordString.slice(1);
     document.getElementById("remaining-lives").innerText = remainingGuesses;
     document.getElementById("guessed-letters").innerText = guessedLetters;
@@ -77,7 +75,7 @@ function editScoreboard() {
         endOfGame = true;
     }
 
-};
+}
 
 
 document.onkeydown = function(event) {
@@ -102,12 +100,12 @@ function guess(letter) {
     }
     editScoreboard();
     winOrLoss();
-};
+}
 
 function determineMatch(letter) {
     // establising an array for letters in word
-    var lettersInWord = [];
-    for (var i = 0; i < countries[randomCountry].length; i++) {
+    const lettersInWord = [];
+    for (let i = 0; i < countries[randomCountry].length; i++) {
         if(countries[randomCountry][i] === letter) {
             lettersInWord.push(i);
         }
@@ -117,12 +115,12 @@ function determineMatch(letter) {
         remainingGuesses--;
     } else {
         // otherwise put matching letter in correct spot in word match
-        for(var i = 0; i < lettersInWord.length; i++) {
+        for(let i = 0; i < lettersInWord.length; i++) {
             wordAttempt[lettersInWord[i]] = letter;
         }
     }
-};
- // if all blanks have been filled by letter, then win. 
+}
+// if all blanks have been filled by letter, then win. 
 function winOrLoss() {
     if(wordAttempt.indexOf(" _ ") === -1 && guessedLetters.length > 0) {
         wins++;
@@ -141,4 +139,4 @@ function winOrLoss() {
         document.getElementById("losing-audio").play();
         endOfGame = true;
     }
-};
+}
