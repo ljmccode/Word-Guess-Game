@@ -33,6 +33,11 @@ var losses = 0;
 var remainingGuesses = 0;
 var maxAttempts = 8;
 
+// New game starts on page load
+window.onload = event => {
+    resetGame()
+}
+
 // what will happen at the start of a new game
 function resetGame() {
     newGame = false;
@@ -49,7 +54,8 @@ function resetGame() {
     }
 
     editScoreboard();
-
+    
+    // puts everything on the scoreboard back to original
     document.getElementById("next-game").style.cssText = "display: none";
     document.getElementById("winning-image").style.cssText = "display: none";
     document.getElementById("losing-image").style.cssText = "display: none";
@@ -57,14 +63,14 @@ function resetGame() {
     console.log(countries[randomCountry]);
 };
 
-// puts everything on the scoreboard back to original
+// Updates Scoreboard
 function editScoreboard() {
     document.getElementById("wins").innerText = wins;
     document.getElementById("losses").innerText = losses;
     document.getElementById("current-country").innerText = "";
-    for (var i = 0; i < wordAttempt.length; i++) {
-        document.getElementById("current-country").innerText += wordAttempt[i];
-    }
+    // Turns wordAttempt Array to string
+    let wordString = wordAttempt.join("");
+    document.getElementById("current-country").innerText = wordString[0].toUpperCase() + wordString.slice(1);
     document.getElementById("remaining-lives").innerText = remainingGuesses;
     document.getElementById("guessed-letters").innerText = guessedLetters;
     if(remainingGuesses <= 0) {
@@ -72,6 +78,7 @@ function editScoreboard() {
     }
 
 };
+
 
 document.onkeydown = function(event) {
     if(endOfGame) {
@@ -130,6 +137,7 @@ function winOrLoss() {
         document.getElementById("next-game").style.cssText = "display: block; margin-right:auto; margin-left: auto";
         document.getElementById("losing-image").style.cssText = "display: block; margin-right:auto; margin-left: auto";
         document.getElementById("start-key").innerText = "";
+        document.getElementById("current-country").innerText = countries[randomCountry][0].toUpperCase() + countries[randomCountry].slice(1);
         document.getElementById("losing-audio").play();
         endOfGame = true;
     }
