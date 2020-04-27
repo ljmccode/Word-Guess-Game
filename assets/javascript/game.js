@@ -34,6 +34,8 @@ const maxAttempts = 8;
 
 // New game starts on page load
 window.onload = () => {
+    document.getElementById("wins").innerText = wins;
+    document.getElementById("losses").innerText = losses;
     resetGame();
 };
 
@@ -63,8 +65,6 @@ function resetGame() {
 
 // Updates Scoreboard
 function editScoreboard() {
-    document.getElementById("wins").innerText = wins;
-    document.getElementById("losses").innerText = losses;
     document.getElementById("current-country").innerText = "";
     // Turns wordAttempt Array to string
     const wordString = wordAttempt.join("");
@@ -94,7 +94,7 @@ function guess(letter) {
     if (remainingGuesses > 0) {
         // double checks if letter has been pressed already
         if (guessedLetters.indexOf(letter) === -1) {
-            guessedLetters.push(letter);
+            guessedLetters.push(" " + letter);
             determineMatch(letter);
         }
     }
@@ -124,6 +124,7 @@ function determineMatch(letter) {
 function winOrLoss() {
     if(wordAttempt.indexOf(" _ ") === -1 && guessedLetters.length > 0) {
         wins++;
+        document.getElementById("wins").innerText = wins;
         document.getElementById("next-game").style.cssText = "display: block; margin-right:auto; margin-left: auto";
         document.getElementById("winning-image").style.cssText = "display: block; margin-right:auto; margin-left: auto";
         document.getElementById("start-key").innerText = "";
@@ -132,6 +133,7 @@ function winOrLoss() {
 // if run out of guesses, then lose
     } else if (remainingGuesses === 0 && guessedLetters.length > 0) {
         losses++;
+        document.getElementById("losses").innerText = losses;
         document.getElementById("next-game").style.cssText = "display: block; margin-right:auto; margin-left: auto";
         document.getElementById("losing-image").style.cssText = "display: block; margin-right:auto; margin-left: auto";
         document.getElementById("start-key").innerText = "";

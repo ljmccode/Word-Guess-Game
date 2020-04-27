@@ -4,6 +4,9 @@ h1, h3 {
 
 body {
     background-image: url(https://images-na.ssl-images-amazon.com/images/G/01/aplusautomation/vendorimages/1c11d9f2-83b4-4a19-a1ac-91a5de8e0992.jpg._CB318277546_.jpg);
+    background-repeat: no-repeat;
+    background-position: center center;
+    background-attachment: fixed;
     background-size: cover;
 }
 
