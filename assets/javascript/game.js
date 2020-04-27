@@ -93,7 +93,7 @@ document.onkeydown = function(event) {
 function guess(letter) {
     if (remainingGuesses > 0) {
         // double checks if letter has been pressed already
-        if (guessedLetters.indexOf(letter) === -1) {
+        if (guessedLetters.indexOf(" " + letter) === -1) {
             guessedLetters.push(" " + letter);
             determineMatch(letter);
         }
