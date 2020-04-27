@@ -1,13 +1,19 @@
-h1, h3 {
-    font-family: 'BioRhyme', serif;
-}
-
+/***************************
+Background Image
+***************************/
 body {
     background-image: url(https://images-na.ssl-images-amazon.com/images/G/01/aplusautomation/vendorimages/1c11d9f2-83b4-4a19-a1ac-91a5de8e0992.jpg._CB318277546_.jpg);
     background-repeat: no-repeat;
     background-position: center center;
     background-attachment: fixed;
     background-size: cover;
+}
+
+/***************************
+Text Formatting
+***************************/
+h1, h3 {
+    font-family: 'BioRhyme', serif;
 }
 
 h1 {
@@ -31,29 +37,24 @@ h3 {
 #current-country {
     color: rgb(108, 25, 108);
     font-weight: bold;
-    font-size: 40px;
+    font-size: 2.5em;
 }
 
-.col-6 {
-    padding: 20px;
-    padding-top: 30px;
-    height: 500px;
-}
-
-#losing-image {
-    max-height: 216px;
-    max-width: 216px;
+#guessed-letters {
+    font-size: 1.5em;
 }
 
 .game-name {
     text-align: center;
 }
 
-#guessed-letters {
-    font-size: 25px;
-}
-
+/***************************
+Game Container
+***************************/
 .col-6 {
+    padding: 20px;
+    padding-top: 30px;
+    height: 500px;
     text-align: center;
     background-color: rgba(237, 231, 231, 0.8);
     border: blue groove 2px;
@@ -67,7 +68,39 @@ h3 {
     border-left: blue groove 1px;
 }
 
+/***************************
+Game Images
+***************************/
+#losing-image {
+    max-height: 216px;
+    max-width: 216px;
+}
+
 #losing-image, #winning-image, #next-game {
     display: none;
 }
 
+/***************************
+Media Queries
+***************************/
+/* Small Devices */
+@media (max-width: 767px) {
+    h1 {
+        font-size: 1.5em !important;
+    }
+
+    h3, #guessed-letters {
+        font-size: 1em !important;
+    }
+    #losing-image, #winning-image {
+        max-height: 100px;
+        max-width: 100px;
+    }
+}
+
+/* Medium Devices */
+@media (min-width: 768px) and (max-width: 1024px) {
+    h3, #guessed-letters {
+        font-size: 1.5em !important;
+    }
+}
